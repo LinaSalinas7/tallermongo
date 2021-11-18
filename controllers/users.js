@@ -21,6 +21,8 @@ exports.create = async(req, res, next) => {
         username: req.body.username,
         identification: req.body.username,
         password: encryptedPassword,
+        photo: req.body.photo,
+        
 
 
     })
