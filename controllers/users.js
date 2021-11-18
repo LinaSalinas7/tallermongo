@@ -7,17 +7,20 @@ const User = require('../models/users')
 exports.create = async(req, res, next) => {
     
 
-    const userExist = await User.findOne({username: req.body.username})
+    const userExist = await User.findOne({id: req.body.id})
 
     if (userExist){
         return res.status("409").send("user already exist")
     }
 
+    let encryptedPassword = await bcrypt.hash(req.body.password, 10)
+
     let user = new User ({
+        id: req.body.id,
         name: req.body.name,
         username: req.body.username,
         identification: req.body.username,
-        password: req.body.password,
+        password: encryptedPassword,
 
 
     })
@@ -41,14 +44,14 @@ exports.show = (req, res, next)=>{
     User.findById(req.params.id)
     .then(user => {
         if(user == null){
-            res.status(404).send({eror: "user not found"})
+            res.status(404).send({error: "user not found"})
         }else{
             res.jason(user)
         }
     })
     .catch(error => {
         debug(error)
-        res.status(500).send({eror: error.message})
+        res.status(500).send({error: error.message})
     })
 }
 
