@@ -32,7 +32,7 @@ exports.create = async(req, res, next) => {
     })
 }
 
-/*exports.index = (req, res, next)=>{
+exports.index = (req, res, next)=>{
     User.find({}, (err, users)=>{
         if(err)
         return next(err)
@@ -69,4 +69,4 @@ exports.delete = (req, res, next)=>{
         return next(err)
         res.send("user deleted sussesfully")
     })
-}*/
+}
