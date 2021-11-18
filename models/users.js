@@ -7,8 +7,7 @@ const userSchema = new mongoose.Schema({
     password:{type: String, require: true},
     photo:{type: String},
     active:{type: Boolean},
-    titulo:{},
-    comentario:{}, 
+    titulo:{titulo:{}, comentario:{}},
     token:{type: String}
 })
 
