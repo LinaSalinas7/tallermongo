@@ -16,10 +16,9 @@ exports.create = async(req, res, next) => {
     let encryptedPassword = await bcrypt.hash(req.body.password, 10)
 
     let user = new User ({
-        id: req.body.id,
         name: req.body.name,
         username: req.body.username,
-        identification: req.body.username,
+        identification: req.body.identification,
         password: encryptedPassword,
         photo: req.body.photo,
         
