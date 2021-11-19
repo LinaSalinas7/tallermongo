@@ -1,24 +1,24 @@
 const debug = require('debug')('productscrud:title')
 const bcrypt = require('bcrypt')
-const users = require('../models/users')
+const titles = require('../models/titles')
 
-const User = require('../models/users')
+const Title = require('../models/titles')
 
 exports.create = async(req, res, next) => {
     
 
-    const titleExist = await Title.findOne({id: req.body.id})
+    const titleExist = await Title.findOne({_id: req.body.id})
 
-    let user = new Title ({
+    let title = new Title ({
         title: req.body.title,
         comentario: req.body.comentario,
     
     })
 
-    user.save(err=>{
+    title.save(err=>{
         if(err)
         return next(err)
-        res.send("title registeres successfully")
+        res.send("title created successfully")
     })
 }
 
@@ -36,7 +36,7 @@ exports.show = (req, res, next)=>{
         if(title == null){
             res.status(404).send({error: "title not found"})
         }else{
-            res.jason(title)
+            res.json(title)
         }
     })
     .catch(error => {
@@ -46,7 +46,7 @@ exports.show = (req, res, next)=>{
 }
 
 exports.update = (req, res, next)=>{
-    User.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, title)=>{
+    Title.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, title)=>{
         if(err)
         return next(err)
         res.send("title updated successfully")
@@ -54,7 +54,7 @@ exports.update = (req, res, next)=>{
 }
 
 exports.delete = (req, res, next)=>{
-    User.findByIdAndRemove(req.params.id, (err, title)=>{
+    Title.findByIdAndRemove(req.params.id, (err, title)=>{
         if(err)
         return next(err)
         res.send("title deleted sussesfully")
